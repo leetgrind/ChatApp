@@ -6,6 +6,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import LoginComponent from './components/login';
 import Home from './pages/Home';
 import ProfilePage from './pages/Profile';
+import ApiTest from './ApiTest';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route exact path='/' element={<Home/>}/>
+              <Route exact path='/api' element={<ApiTest/>}/>
               <Route exact path="/register" element={<Register/>}/>
               <Route exact path='/profile' element={<ProfilePage/>}/>
               <Route exact path="/login" element={<LoginComponent/>}/>
