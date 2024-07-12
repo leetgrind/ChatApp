@@ -11,6 +11,7 @@ const io = new Server(server);
 io.on('connection', (socket) => {
     console.log(`${socket.id} - user connected`);
     socket.on('chat message', (msg) => {
+        io.emit('chat message', `${socket.id} - ${msg}`);
         console.log(`${socket.id} - sent message - ${msg}`);
     })
     socket.on('disconnect', () => {
