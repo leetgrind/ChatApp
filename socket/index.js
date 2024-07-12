@@ -9,7 +9,13 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log(`${socket.id} - user connected`);
+    socket.on('chat message', (msg) => {
+        console.log(`${socket.id} - sent message - ${msg}`);
+    })
+    socket.on('disconnect', () => {
+        console.log(`${socket.id} - user disconnected`);
+    });
 })
 
 app.get("/", (req, res) => {
