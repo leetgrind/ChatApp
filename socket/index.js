@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 const server = http.createServer(app);
 
+let usersList = [];
+
 const io = new Server(server, {
     cors: {
         origin: 'http://localhost:3000'
@@ -15,6 +17,13 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     console.log(`${socket.id} - user connected`);
+
+    socket.on('join', (data) => {
+        const {username} = data;
+        console.log(`${username} connected`);
+        usersList.push({id: socket.id, username: username});
+    });
+
     socket.on('chat message', (msg) => {
         io.emit('chat message', `${socket.id} - ${msg}`);
         console.log(`${socket.id} - sent message - ${msg}`);
